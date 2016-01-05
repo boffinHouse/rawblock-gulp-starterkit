@@ -1,0 +1,23 @@
+// ====================================================================
+//  rb-respond-to
+//
+//  Managing responsive breakpoints from breakpointConfig
+//=====================================================================
+@mixin rb-respond-to($breakpoint) {
+	@if map-has-key($breakpointConfigs, $breakpoint) {
+		$breakpointData: map-get($breakpointConfigs, $breakpoint);
+		$breakpointMedia: map-get($breakpointData, media);
+
+		@if($breakpoint == 'all') {
+			@content;
+		}
+		@else {
+			@media #{$breakpointMedia} {
+				@content;
+			}
+		}
+	}
+	@else {
+		@warn "Value #{$breakpoint} not found in $breakpoint-configs"
+	}
+}
